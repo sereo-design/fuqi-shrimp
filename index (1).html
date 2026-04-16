@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>夫妻蝦莊｜板橋泰國蝦 烤物 深夜食堂</title>
+<meta name="description" content="板橋三民路人氣深夜海鮮餐廳，活體泰國蝦、胡椒魚、各式烤物，Google評價4.9星，營業至凌晨3點。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700;900&family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FDF8F0;
+  --bg2: #FAF3E8;
+  --bg3: #F5EBD8;
+  --ink: #1C1008;
+  --ink2: #3A2A18;
+  --red: #C41E1E;
+  --red2: #E83030;
+  --orange: #E8600A;
+  --amber: #D4920A;
+  --cream: #F5E6C8;
+  --muted: rgba(28,16,8,0.55);
+  --line: rgba(196,30,30,0.15);
+  --line2: rgba(28,16,8,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--bg); color:var(--ink); font-family:'Noto Serif TC',serif; overflow-x:hidden; cursor:none; }
+
+/* CURSOR */
+.cursor { width:10px; height:10px; background:var(--red); border-radius:50%; position:fixed; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition:transform 0.2s, background 0.3s; }
+.cursor-ring { width:36px; height:36px; border:1.5px solid var(--red); border-radius:50%; position:fixed; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); opacity:0.4; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:18px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(253,248,240,0.96);
+  border-bottom:2px solid var(--red);
+  backdrop-filter:blur(16px);
+  transition:all 0.4s;
+}
+nav.scrolled { box-shadow:0 4px 32px rgba(196,30,30,0.12); }
+.nav-logo { display:flex; flex-direction:column; }
+.nav-logo-main { font-size:1.3rem; letter-spacing:0.15em; color:var(--red); font-weight:900; }
+.nav-logo-sub { font-size:0.5rem; letter-spacing:0.5em; color:var(--orange); margin-top:2px; font-weight:400; }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a { color:var(--ink2); text-decoration:none; font-size:0.78rem; letter-spacing:0.2em; font-weight:500; transition:color 0.3s; }
+.nav-links a:hover { color:var(--red); }
+.nav-cta {
+  background:var(--red); color:#fff;
+  padding:10px 24px;
+  font-family:inherit; font-size:0.75rem;
+  letter-spacing:0.2em; text-decoration:none;
+  transition:all 0.3s; font-weight:700;
+  border:2px solid var(--red);
+}
+.nav-cta:hover { background:transparent; color:var(--red); }
+.nav-toggle { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:none; }
+.nav-toggle span { width:24px; height:2px; background:var(--red); transition:all 0.3s; }
+
+/* HERO */
+#hero {
+  min-height:100vh;
+  display:flex; align-items:center;
+  padding:120px 48px 80px;
+  position:relative; overflow:hidden;
+}
+.hero-bg {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 90% 10%, rgba(232,96,10,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 10% 90%, rgba(196,30,30,0.08) 0%, transparent 50%),
+    var(--bg);
+}
+/* 火焰紋路背景 */
+.hero-pattern {
+  position:absolute; inset:0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 40px,
+    rgba(196,30,30,0.025) 40px,
+    rgba(196,30,30,0.025) 41px
+  );
+  pointer-events:none;
+}
+.hero-watermark {
+  position:absolute; right:-3%; bottom:-5%;
+  font-family:'Playfair Display',serif;
+  font-size:clamp(12rem,22vw,24rem);
+  font-weight:900; font-style:italic;
+  color:rgba(196,30,30,0.04);
+  pointer-events:none; user-select:none;
+  line-height:1;
+}
+.hero-content {
+  position:relative; z-index:2;
+  max-width:1200px; margin:0 auto; width:100%;
+  display:grid; grid-template-columns:1.1fr 0.9fr;
+  gap:60px; align-items:center;
+}
+.hero-text { animation:fadeUp 0.9s ease both; }
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--red); color:#fff;
+  padding:6px 16px;
+  font-size:0.62rem; letter-spacing:0.4em;
+  font-weight:700; margin-bottom:24px;
+}
+.hero-badge::before { content:'★'; font-size:0.8rem; }
+.hero-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(4rem,8vw,7.5rem);
+  font-weight:900; line-height:0.9;
+  color:var(--ink);
+  margin-bottom:12px;
+  letter-spacing:-0.02em;
+}
+.hero-title span { color:var(--red); display:block; }
+.hero-title-sub {
+  font-size:clamp(1.2rem,2.5vw,2rem);
+  font-weight:400; color:var(--orange);
+  letter-spacing:0.3em; margin-bottom:28px;
+  display:block; font-family:'Noto Serif TC',serif;
+}
+.hero-desc {
+  font-size:0.92rem; line-height:2;
+  color:var(--muted); font-weight:300;
+  max-width:480px; margin-bottom:16px;
+}
+.hero-rating {
+  display:flex; align-items:center; gap:12px;
+  margin-bottom:40px;
+  padding:14px 20px;
+  background:var(--cream);
+  border-left:4px solid var(--red);
+  width:fit-content;
+}
+.hero-stars { color:var(--amber); font-size:1.1rem; letter-spacing:2px; }
+.hero-rating-text { font-size:0.78rem; color:var(--ink2); font-weight:500; }
+.hero-rating-text strong { color:var(--red); font-size:1.1rem; }
+.hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
+.btn-red {
+  background:var(--red); color:#fff;
+  padding:14px 36px;
+  font-family:inherit; font-size:0.82rem;
+  letter-spacing:0.2em; text-decoration:none;
+  display:inline-flex; align-items:center; gap:10px;
+  transition:all 0.3s; font-weight:700;
+  border:2px solid var(--red);
+}
+.btn-red:hover { background:var(--red2); transform:translateY(-3px); box-shadow:0 12px 32px rgba(196,30,30,0.3); }
+.btn-outline {
+  border:2px solid var(--ink2);
+  color:var(--ink2);
+  padding:14px 36px;
+  font-family:inherit; font-size:0.82rem;
+  letter-spacing:0.2em; text-decoration:none;
+  display:inline-flex; align-items:center; gap:10px;
+  transition:all 0.3s; background:transparent;
+}
+.btn-outline:hover { border-color:var(--red); color:var(--red); }
+
+/* 右側菜單卡 */
+.hero-visual { animation:fadeUp 0.9s 0.2s ease both; }
+.menu-showcase {
+  background:#fff;
+  border:2px solid var(--line2);
+  overflow:hidden;
+  box-shadow:8px 8px 0 var(--red), 12px 12px 0 rgba(196,30,30,0.1);
+}
+.menu-showcase-header {
+  background:var(--red);
+  padding:20px 28px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.menu-showcase-title { color:#fff; font-size:0.65rem; letter-spacing:0.5em; font-weight:700; }
+.menu-showcase-live {
+  display:flex; align-items:center; gap:6px;
+  color:rgba(255,255,255,0.9); font-size:0.6rem; letter-spacing:0.2em;
+}
+.menu-showcase-live::before {
+  content:'';
+  width:8px; height:8px;
+  background:#4ade80;
+  border-radius:50%;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+.menu-items-list { padding:0; }
+.menu-item-row {
+  display:flex; align-items:center; gap:16px;
+  padding:18px 28px;
+  border-bottom:1px solid var(--line2);
+  transition:background 0.3s;
+}
+.menu-item-row:last-child { border:none; }
+.menu-item-row:hover { background:var(--bg2); }
+.menu-item-emoji { font-size:1.8rem; flex-shrink:0; width:44px; text-align:center; }
+.menu-item-info { flex:1; }
+.menu-item-name { font-size:0.92rem; font-weight:700; color:var(--ink); margin-bottom:3px; }
+.menu-item-desc { font-size:0.68rem; color:var(--muted); letter-spacing:0.1em; }
+.menu-item-tag {
+  font-size:0.55rem; letter-spacing:0.2em;
+  background:var(--cream); color:var(--red);
+  padding:3px 8px; font-weight:700;
+  border:1px solid rgba(196,30,30,0.2);
+  flex-shrink:0;
+}
+.menu-item-tag.hot { background:var(--red); color:#fff; border-color:var(--red); }
+.menu-showcase-footer {
+  background:var(--bg3);
+  padding:14px 28px;
+  display:flex; justify-content:space-between;
+  border-top:1px solid var(--line2);
+}
+.showcase-stat { text-align:center; }
+.showcase-stat-n { font-family:'Playfair Display',serif; font-size:1.6rem; color:var(--red); font-weight:900; display:block; line-height:1; }
+.showcase-stat-l { font-size:0.55rem; letter-spacing:0.3em; color:var(--muted); margin-top:3px; display:block; }
+
+@keyframes fadeUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+
+/* MARQUEE */
+.marquee-wrap { overflow:hidden; background:var(--red); padding:12px 0; }
+.marquee-track { display:flex; animation:marquee 25s linear infinite; white-space:nowrap; }
+.marquee-item { font-size:0.65rem; letter-spacing:0.4em; color:rgba(255,255,255,0.95); padding:0 32px; flex-shrink:0; font-weight:700; }
+.marquee-dot { color:rgba(255,255,255,0.4); }
+@keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+/* DIVIDER */
+.divider { width:100%; height:2px; background:linear-gradient(to right, transparent, var(--line), transparent); }
+
+/* SECTION */
+.section { padding:100px 48px; max-width:1200px; margin:0 auto; }
+.section-label { font-size:0.62rem; letter-spacing:0.55em; color:var(--red); font-weight:700; margin-bottom:14px; display:block; }
+.section-title { font-family:'Playfair Display',serif; font-size:clamp(2.5rem,5vw,4rem); font-weight:900; line-height:1.05; margin-bottom:16px; color:var(--ink); }
+.section-desc { font-size:0.92rem; line-height:2; color:var(--muted); font-weight:300; max-width:560px; }
+
+/* MENU SECTION */
+#menu { background:var(--bg2); padding:100px 0; border-top:2px solid var(--line); border-bottom:2px solid var(--line); }
+.menu-inner { max-width:1200px; margin:0 auto; padding:0 48px; }
+.menu-header { margin-bottom:60px; }
+.menu-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:3px; background:var(--line2); border:2px solid var(--line2); }
+.menu-card {
+  background:#fff;
+  padding:40px 36px;
+  transition:all 0.3s;
+  position:relative; overflow:hidden;
+}
+.menu-card::after {
+  content:'';
+  position:absolute; left:0; top:0; bottom:0;
+  width:4px; background:var(--red);
+  transform:scaleY(0); transition:transform 0.3s;
+  transform-origin:bottom;
+}
+.menu-card:hover { background:var(--bg); }
+.menu-card:hover::after { transform:scaleY(1); }
+.menu-card-emoji { font-size:3rem; margin-bottom:16px; display:block; }
+.menu-card-title { font-size:1.2rem; font-weight:900; margin-bottom:10px; color:var(--ink); letter-spacing:0.05em; }
+.menu-card-desc { font-size:0.82rem; line-height:1.9; color:var(--muted); font-weight:300; margin-bottom:20px; }
+.menu-card-items { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.menu-card-items li { font-size:0.78rem; color:var(--ink2); display:flex; align-items:center; gap:10px; font-weight:400; }
+.menu-card-items li::before { content:'🦐'; font-size:0.7rem; }
+
+/* HIGHLIGHT */
+#highlight { padding:100px 0; background:var(--ink); position:relative; overflow:hidden; }
+#highlight::before {
+  content:'';
+  position:absolute; inset:0;
+  background:repeating-linear-gradient(-45deg, transparent, transparent 30px, rgba(196,30,30,0.05) 30px, rgba(196,30,30,0.05) 31px);
+}
+.highlight-inner { max-width:1200px; margin:0 auto; padding:0 48px; position:relative; z-index:1; }
+.highlight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.08); margin-top:60px; }
+.highlight-card {
+  background:rgba(255,255,255,0.04);
+  padding:44px 36px;
+  transition:all 0.3s;
+  text-align:center;
+  border:1px solid rgba(255,255,255,0.06);
+}
+.highlight-card:hover { background:rgba(196,30,30,0.15); }
+.highlight-card-num { font-family:'Playfair Display',serif; font-size:4rem; color:var(--red); font-weight:900; display:block; line-height:1; margin-bottom:12px; }
+.highlight-card-title { font-size:1rem; font-weight:700; color:#fff; margin-bottom:10px; letter-spacing:0.1em; }
+.highlight-card-desc { font-size:0.78rem; color:rgba(255,255,255,0.55); line-height:1.8; font-weight:300; }
+.highlight-section-label { color:var(--red); }
+.highlight-section-title { color:#fff; }
+.highlight-section-desc { color:rgba(255,255,255,0.65); }
+
+/* INFO */
+#info { padding:100px 48px; max-width:1200px; margin:0 auto; }
+.info-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; margin-top:60px; }
+.info-cards { display:flex; flex-direction:column; gap:20px; }
+.info-card {
+  display:flex; gap:20px; align-items:flex-start;
+  padding:24px;
+  background:#fff;
+  border:1px solid var(--line2);
+  border-left:4px solid var(--red);
+  transition:all 0.3s;
+}
+.info-card:hover { box-shadow:4px 4px 0 var(--red); transform:translate(-2px,-2px); }
+.info-card-icon { font-size:1.6rem; flex-shrink:0; width:44px; text-align:center; }
+.info-label { font-size:0.58rem; letter-spacing:0.4em; color:var(--red); font-weight:700; margin-bottom:6px; display:block; }
+.info-value { font-size:0.95rem; color:var(--ink); font-weight:500; line-height:1.6; }
+.info-value a { color:var(--red); text-decoration:none; }
+.info-ctas { display:flex; flex-direction:column; gap:12px; margin-top:24px; }
+.info-ctas a { text-align:center; padding:15px; font-family:inherit; font-size:0.82rem; letter-spacing:0.2em; text-decoration:none; transition:all 0.3s; display:flex; align-items:center; justify-content:center; gap:10px; font-weight:700; }
+.review-box {
+  background:#fff;
+  border:2px solid var(--line2);
+  padding:40px;
+  box-shadow:6px 6px 0 rgba(196,30,30,0.1);
+}
+.review-box-title { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--red); font-weight:900; margin-bottom:8px; }
+.review-box-stars { color:var(--amber); font-size:1.3rem; letter-spacing:3px; margin-bottom:24px; display:block; }
+.reviews { display:flex; flex-direction:column; gap:16px; }
+.review-item { padding:16px; background:var(--bg2); border-left:3px solid var(--amber); }
+.review-text { font-size:0.8rem; line-height:1.8; color:var(--ink2); font-weight:300; margin-bottom:6px; }
+.review-author { font-size:0.62rem; color:var(--muted); letter-spacing:0.2em; }
+
+/* FOOTER */
+footer {
+  background:var(--ink);
+  padding:56px 48px 40px;
+  color:#fff;
+}
+.footer-inner { max-width:1200px; margin:0 auto; }
+.footer-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:40px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.1); flex-wrap:wrap; gap:32px; }
+.footer-brand-main { font-size:1.5rem; letter-spacing:0.15em; color:var(--red); font-weight:900; margin-bottom:6px; }
+.footer-brand-sub { font-size:0.52rem; letter-spacing:0.5em; color:rgba(255,255,255,0.4); font-weight:300; }
+.footer-brand-desc { font-size:0.78rem; color:rgba(255,255,255,0.5); line-height:1.8; max-width:300px; margin-top:12px; font-weight:300; }
+.footer-links { display:flex; flex-direction:column; gap:10px; }
+.footer-links a { color:rgba(255,255,255,0.6); text-decoration:none; font-size:0.78rem; letter-spacing:0.15em; transition:color 0.3s; }
+.footer-links a:hover { color:var(--red); }
+.footer-social { display:flex; gap:10px; }
+.social-btn { width:40px; height:40px; border:1px solid rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; text-decoration:none; color:rgba(255,255,255,0.5); font-size:0.75rem; transition:all 0.3s; background:rgba(255,255,255,0.05); font-weight:700; }
+.social-btn:hover { border-color:var(--red); color:var(--red); background:rgba(196,30,30,0.1); }
+.footer-bottom { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+.footer-copy { font-size:0.58rem; letter-spacing:0.2em; color:rgba(255,255,255,0.25); }
+.footer-powered { font-size:0.58rem; letter-spacing:0.2em; color:rgba(255,255,255,0.2); }
+.footer-powered a { color:rgba(196,30,30,0.6); text-decoration:none; transition:color 0.3s; }
+.footer-powered a:hover { color:var(--red); }
+
+/* FLOAT */
+.float-wrap { position:fixed; bottom:24px; right:20px; z-index:300; display:flex; flex-direction:column; gap:10px; }
+.float-btn { width:54px; height:54px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:1.3rem; box-shadow:0 4px 20px rgba(0,0,0,0.2); transition:transform 0.3s; }
+.float-btn:hover { transform:scale(1.12); }
+.float-line { background:#06C755; }
+.float-ig { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+
+/* MOBILE NAV */
+.mobile-nav { display:none; position:fixed; top:72px; left:0; right:0; background:rgba(253,248,240,0.99); padding:24px; border-bottom:2px solid var(--red); z-index:199; flex-direction:column; gap:16px; }
+.mobile-nav.open { display:flex; }
+.mobile-nav a { color:var(--ink2); text-decoration:none; font-size:0.9rem; letter-spacing:0.2em; font-weight:500; padding:10px 0; border-bottom:1px solid var(--line2); }
+.mobile-nav a:last-child { border:none; color:var(--red); font-weight:700; }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1); }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal-d1 { transition-delay:0.12s; }
+.reveal-d2 { transition-delay:0.24s; }
+.reveal-d3 { transition-delay:0.36s; }
+
+@media(max-width:960px) {
+  nav { padding:16px 20px; }
+  .nav-links, .nav-cta { display:none; }
+  .nav-toggle { display:flex; }
+  #hero { padding:100px 20px 60px; }
+  .hero-content { grid-template-columns:1fr; gap:40px; }
+  .menu-inner { padding:0 20px; }
+  .menu-grid { grid-template-columns:1fr; }
+  .highlight-inner { padding:0 20px; }
+  .highlight-grid { grid-template-columns:1fr; }
+  #info { padding:60px 20px; }
+  .info-grid { grid-template-columns:1fr; gap:40px; }
+  footer { padding:40px 20px; }
+  .footer-top { flex-direction:column; }
+  .section { padding:60px 20px; }
+  body { cursor:auto; }
+  .cursor, .cursor-ring { display:none; }
+}
+@media(max-width:600px) {
+  .menu-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <div class="nav-logo">
+    <span class="nav-logo-main">夫妻蝦莊</span>
+    <span class="nav-logo-sub">泰國蝦 · 烤物 · 深夜食堂</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#menu">菜單</a></li>
+    <li><a href="#highlight">特色</a></li>
+    <li><a href="#info">位置訂位</a></li>
+  </ul>
+  <a href="tel:0979666103" class="nav-cta">📞 立即訂位</a>
+  <button class="nav-toggle" onclick="toggleNav()"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#menu" onclick="closeNav()">菜單</a>
+  <a href="#highlight" onclick="closeNav()">特色</a>
+  <a href="#info" onclick="closeNav()">位置訂位</a>
+  <a href="tel:0979666103">📞 0979-666-103 立即訂位</a>
+</div>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-watermark">蝦</div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">Google 4.9 ★ 板橋人氣深夜海鮮</div>
+      <h1 class="hero-title">
+        夫妻
+        <span>蝦莊</span>
+      </h1>
+      <span class="hero-title-sub">泰國蝦 · 烤物 · 深夜食堂</span>
+      <p class="hero-desc">板橋三民路巷子裡的深夜寶藏。活體泰國蝦現撈現烤，胡椒魚鮮嫩入味，烤物拼盤豐盛過癮。深夜11點你還在找吃的？我們開到凌晨3點等你。</p>
+      <div class="hero-rating">
+        <span class="hero-stars">★★★★★</span>
+        <div class="hero-rating-text">
+          Google評價 <strong>4.9</strong> 分 · 85則好評
+        </div>
+      </div>
+      <div class="hero-ctas">
+        <a href="tel:0979666103" class="btn-red">📞 0979-666-103 訂位</a>
+        <a href="#menu" class="btn-outline">查看菜單 →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="menu-showcase" style="overflow:hidden;position:relative;">
+        <div class="menu-showcase-header">
+          <span class="menu-showcase-title">店內活體蝦缸</span>
+          <span class="menu-showcase-live">現撈現烤</span>
+        </div>
+        <div style="position:relative;width:100%;background:#000;">
+          <video autoplay muted loop playsinline style="width:100%;display:block;max-height:320px;object-fit:cover;">
+            <source src="店內蝦缸1.mp4" type="video/mp4">
+            <source src="店內蝦缸2.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;bottom:12px;left:12px;background:rgba(196,30,30,0.85);color:#fff;font-size:0.6rem;letter-spacing:0.3em;padding:5px 12px;font-weight:700;">活體泰國蝦 · 現撈現烤</div>
+        </div>
+        <div class="menu-showcase-footer">
+          <div class="showcase-stat">
+            <span class="showcase-stat-n">4.9</span>
+            <span class="showcase-stat-l">Google評分</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="showcase-stat-n">85+</span>
+            <span class="showcase-stat-l">好評數</span>
+          </div>
+          <div class="showcase-stat">
+            <span class="showcase-stat-n">3AM</span>
+            <span class="showcase-stat-l">營業至</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">活體泰國蝦</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">胡椒魚</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">烤小卷</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">烤物拼盤</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">深夜食堂</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">板橋三民路</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">開到凌晨3點</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Google 4.9星</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">活體泰國蝦</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">胡椒魚</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">烤小卷</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">烤物拼盤</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">深夜食堂</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">板橋三民路</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">開到凌晨3點</span><span class="marquee-dot">·</span>
+    <span class="marquee-item">Google 4.9星</span><span class="marquee-dot">·</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div id="menu">
+  <div class="menu-inner">
+    <div class="menu-header">
+      <span class="section-label">OUR MENU</span>
+      <h2 class="section-title">招牌菜色</h2>
+      <p class="section-desc">每一道都是老饕回頭的理由。</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card reveal">
+        <span class="menu-card-emoji">🦐</span>
+        <div class="menu-card-title">活體泰國蝦</div>
+        <p class="menu-card-desc">店內養殖活體泰國蝦，現撈現烤，蝦膏飽滿鮮甜，肉質彈牙，是本店的靈魂招牌。</p>
+        <ul class="menu-card-items">
+          <li>鹽烤泰國蝦</li>
+          <li>蒜頭蝦</li>
+          <li>胡椒蝦</li>
+          <li>檸檬蝦</li>
+        </ul>
+      </div>
+      <div class="menu-card reveal reveal-d1">
+        <span class="menu-card-emoji">🐟</span>
+        <div class="menu-card-title">胡椒魚 · 烤物</div>
+        <p class="menu-card-desc">招牌胡椒魚鮮嫩入味，炭火烤物香氣四溢，配啤酒是板橋深夜的最佳組合。</p>
+        <ul class="menu-card-items">
+          <li>胡椒魚</li>
+          <li>烤小卷</li>
+          <li>烤透抽</li>
+          <li>各式烤物拼盤</li>
+        </ul>
+      </div>
+      <div class="menu-card reveal reveal-d2">
+        <span class="menu-card-emoji">🍺</span>
+        <div class="menu-card-title">下酒小菜</div>
+        <p class="menu-card-desc">精選各式下酒小菜，搭配冰鎮啤酒，讓你的深夜更有滋味。</p>
+        <ul class="menu-card-items">
+          <li>炒蛤蜊</li>
+          <li>炒花枝</li>
+          <li>各式熱炒</li>
+          <li>冰鎮飲料</li>
+        </ul>
+      </div>
+      <div class="menu-card reveal reveal-d3">
+        <span class="menu-card-emoji">👨‍👩‍👧‍👦</span>
+        <div class="menu-card-title">聚餐套餐</div>
+        <p class="menu-card-desc">多人聚餐首選，老闆娘推薦組合，豐盛實惠，讓每桌都吃得開心。</p>
+        <ul class="menu-card-items">
+          <li>4人歡聚套餐</li>
+          <li>6人豪爽套餐</li>
+          <li>生日包場洽詢</li>
+          <li>電話預訂優先入座</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 菜色照片牆 -->
+<div id="gallery" style="background:var(--bg3);padding:80px 0;border-top:2px solid var(--line);border-bottom:2px solid var(--line);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 48px;">
+    <span class="section-label">OUR DISHES</span>
+    <h2 class="section-title" style="margin-bottom:40px;">招牌菜色實拍</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:var(--line2);" id="photoGrid">
+      <div class="photo-cell reveal" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="胡椒蝦.jpg" alt="胡椒蝦" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">胡椒蝦</div>
+      </div>
+      <div class="photo-cell reveal reveal-d1" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="蒜頭蝦.jpg" alt="蒜頭蝦" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">蒜頭蝦</div>
+      </div>
+      <div class="photo-cell reveal reveal-d2" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="蒜香奶油蝦.jpg" alt="蒜香奶油蝦" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">蒜香奶油蝦</div>
+      </div>
+      <div class="photo-cell reveal reveal-d3" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="檸檬蝦.jpg" alt="檸檬蝦" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">檸檬蝦</div>
+      </div>
+      <div class="photo-cell reveal" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="胡椒魚.jpg" alt="胡椒魚" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">胡椒魚</div>
+      </div>
+      <div class="photo-cell reveal reveal-d1" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="鹽烤魚.jpg" alt="鹽烤魚" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">鹽烤魚</div>
+      </div>
+      <div class="photo-cell reveal reveal-d2" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="胡椒鳳螺.jpg" alt="胡椒鳳螺" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">胡椒鳳螺</div>
+      </div>
+      <div class="photo-cell reveal reveal-d3" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="燒酒雞佛.jpg" alt="燒酒雞佛" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">燒酒雞佛</div>
+      </div>
+      <div class="photo-cell reveal" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="絲瓜蛤蠣湯.jpg" alt="絲瓜蛤蠣湯" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">絲瓜蛤蠣湯</div>
+      </div>
+      <div class="photo-cell reveal reveal-d1" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="香烤節瓜.jpg" alt="香烤節瓜" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">香烤節瓜</div>
+      </div>
+      <div class="photo-cell reveal reveal-d2" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="炒高麗菜.jpg" alt="炒高麗菜" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">炒高麗菜</div>
+      </div>
+      <div class="photo-cell reveal reveal-d3" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="店門面.jpg" alt="店門面" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">夫妻蝦莊</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.photo-cell { cursor:pointer; }
+.photo-label {
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(28,16,8,0.75));
+  color:#fff;font-size:0.65rem;letter-spacing:0.3em;
+  padding:20px 12px 10px;font-weight:700;
+  opacity:0;transition:opacity 0.3s;
+}
+.photo-cell:hover .photo-label { opacity:1; }
+@media(max-width:960px){
+  #photoGrid { grid-template-columns:repeat(2,1fr) !important; }
+}
+@media(max-width:480px){
+  #photoGrid { grid-template-columns:repeat(2,1fr) !important; }
+}
+</style>
+
+<div class="divider"></div>
+
+<div id="highlight">
+  <div class="highlight-inner">
+    <span class="section-label highlight-section-label">WHY US</span>
+    <h2 class="section-title highlight-section-title">為什麼板橋人都愛來</h2>
+    <p class="section-desc highlight-section-desc">Google 4.9星不是偶然，是每一隻蝦、每一條魚的實力累積。</p>
+    <div class="highlight-grid">
+      <div class="highlight-card reveal">
+        <span class="highlight-card-num">4.9</span>
+        <div class="highlight-card-title">Google 評分</div>
+        <p class="highlight-card-desc">85則真實好評，板橋海鮮口碑第一，老饕認證不踩雷。</p>
+      </div>
+      <div class="highlight-card reveal reveal-d1">
+        <span class="highlight-card-num">活</span>
+        <div class="highlight-card-title">活體現撈現烤</div>
+        <p class="highlight-card-desc">店內養殖活體泰國蝦，現點現撈，新鮮度無庸置疑，蝦膏飽滿。</p>
+      </div>
+      <div class="highlight-card reveal reveal-d2">
+        <span class="highlight-card-num">3AM</span>
+        <div class="highlight-card-title">深夜到凌晨3點</div>
+        <p class="highlight-card-desc">下班後的最佳去處，下酒、聊天、吃蝦，板橋深夜食堂首選。</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="info" class="section" style="max-width:1200px;">
+  <span class="section-label">FIND US</span>
+  <h2 class="section-title">位置 · 訂位</h2>
+
+  <!-- Google Maps 嵌入 -->
+  <div style="width:100%;margin-bottom:48px;border:2px solid var(--line2);overflow:hidden;box-shadow:6px 6px 0 rgba(196,30,30,0.1);">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.7!2d121.4633!3d25.0089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a9b0b0b0b0b1%3A0x0!2z5a6J5Yw15aSn6I6o5bq36Imv5LiJ5q616Kmm5LiO5YiR55Wq!5e0!3m2!1szh-TW!2stw!4v1681234567890!5m2!1szh-TW!2stw&q=新北市板橋區三民路二段110-1號+夫妻蝦莊"
+      width="100%"
+      height="320"
+      style="border:0;display:block;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <!-- 營業時間 JSON-LD 結構化資料（SEO用） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "夫妻蝦莊",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "三民路二段110-1號",
+      "addressLocality": "板橋區",
+      "addressRegion": "新北市",
+      "addressCountry": "TW"
+    },
+    "telephone": "0979-666-103",
+    "openingHours": "Mo-Su 17:00-03:00",
+    "servesCuisine": "海鮮,泰國蝦,烤物",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "85"
+    }
+  }
+  </script>
+
+  <div class="info-grid">
+    <div>
+      <div class="info-cards">
+        <div class="info-card reveal">
+          <div class="info-card-icon">📍</div>
+          <div>
+            <span class="info-label">地址</span>
+            <div class="info-value"><a href="https://maps.google.com/?q=新北市板橋區三民路二段110-1號+夫妻蝦莊" target="_blank" style="color:var(--red);text-decoration:none;">新北市板橋區三民路二段110-1號 📍</a></div>
+          </div>
+        </div>
+        <div class="info-card reveal reveal-d1">
+          <div class="info-card-icon">📞</div>
+          <div>
+            <span class="info-label">電話訂位</span>
+            <div class="info-value"><a href="tel:0979666103">0979-666-103</a></div>
+          </div>
+        </div>
+        <div class="info-card reveal reveal-d2">
+          <div class="info-card-icon">🕐</div>
+          <div>
+            <span class="info-label">營業時間</span>
+            <div class="info-value">每日 17:00 — 凌晨 03:00<br><small style="color:var(--muted);font-size:0.75rem;">（請先來電確認公休日）</small></div>
+          </div>
+        </div>
+        <div class="info-card reveal reveal-d3">
+          <div class="info-card-icon">💰</div>
+          <div>
+            <span class="info-label">消費方式</span>
+            <div class="info-value">只收現金 · 均消 $400–600</div>
+          </div>
+        </div>
+      </div>
+      <div class="info-ctas">
+        <a href="tel:0979666103" class="btn-red">📞 立即電話訂位</a>
+        <a href="https://line.me/ti/p/0979666103" target="_blank" class="btn-outline">💬 LINE 聯絡我們</a>
+        <a href="https://instagram.com/c.l_shrimp" target="_blank" class="btn-outline">📸 Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61584847914954" target="_blank" class="btn-outline">👍 Facebook</a>
+      </div>
+    </div>
+    <div class="review-box reveal">
+      <div class="review-box-title">食客怎麼說</div>
+      <span class="review-box-stars">★★★★★</span>
+      <div class="reviews">
+        <div class="review-item">
+          <p class="review-text">「蝦子超級新鮮，蝦膏飽滿！胡椒魚也很入味，下次還要再來！」</p>
+          <span class="review-author">— Google 評論</span>
+        </div>
+        <div class="review-item">
+          <p class="review-text">「板橋深夜美食首選！老闆娘很親切，份量超實在，cp值很高。」</p>
+          <span class="review-author">— Google 評論</span>
+        </div>
+        <div class="review-item">
+          <p class="review-text">「烤物拼盤超豐盛，一桌人吃得很開心，下班聚餐最好的選擇！」</p>
+          <span class="review-author">— Google 評論</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand-main">夫妻蝦莊</div>
+        <div class="footer-brand-sub">泰國蝦 · 烤物 · 板橋深夜食堂</div>
+        <p class="footer-brand-desc">新北市板橋區三民路二段110-1號<br>每日17:00–03:00 · 0979-666-103</p>
+      </div>
+      <div class="footer-links">
+        <a href="#menu">菜單</a>
+        <a href="#highlight">特色</a>
+        <a href="#info">位置訂位</a>
+        <a href="tel:0979666103">電話訂位</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/profile.php?id=61584847914954" target="_blank" class="social-btn">FB</a>
+        <a href="https://instagram.com/c.l_shrimp" target="_blank" class="social-btn">IG</a>
+        <a href="https://line.me/ti/p/0979666103" target="_blank" class="social-btn">LINE</a>
+        <a href="tel:0979666103" class="social-btn">📞</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 夫妻蝦莊 · All Rights Reserved · 只收現金</div>
+      <div class="footer-powered">Powered by <a href="https://sereo.design" target="_blank">晴域 Sereo</a> · 數位美學設計</div>
+    </div>
+  </div>
+</footer>
+
+<div class="float-wrap">
+  <a href="tel:0979666103" class="float-btn float-line" title="電話訂位" style="background:var(--red);font-size:1.4rem;">📞</a>
+  <a href="https://line.me/ti/p/0979666103" target="_blank" class="float-btn" title="LINE" style="background:#06C755;font-size:1.1rem;color:#fff;font-weight:900;">LINE</a>
+  <a href="https://instagram.com/c.l_shrimp" target="_blank" class="float-btn float-ig" title="Instagram">📸</a>
+  <a href="https://www.facebook.com/profile.php?id=61584847914954" target="_blank" class="float-btn" title="Facebook" style="background:#1877F2;font-size:1.1rem;color:#fff;font-weight:900;">FB</a>
+</div>
+
+<script>
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+function animateCursor() {
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+  rx+=(mx-rx)*0.1; ry+=(my-ry)*0.1;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+document.querySelectorAll('a,button').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.transform='translate(-50%,-50%) scale(2)'; cursor.style.background='#E83030'; });
+  el.addEventListener('mouseleave', () => { cursor.style.transform='translate(-50%,-50%) scale(1)'; cursor.style.background='#C41E1E'; });
+});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+function toggleNav() { document.getElementById('mobileNav').classList.toggle('open'); }
+function closeNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+</script>
+</body>
+</html>
