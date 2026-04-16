@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>晴域 Sereo｜數位美學設計顧問</title>
+<meta name="description" content="晴域 Sereo，專為美業與實體商圈提供數位美學設計、品牌視覺規劃與網站架設服務。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #FAFAF7;
+  --bg2:   #EEEEE8;
+  --bg3:   #E0E8DD;
+  --ink:   #1A1A1A;
+  --ink2:  #333333;
+  --gold:  #2F5733;
+  --gold2: #4A7D50;
+  --gold3: #EDF5EE;
+  --ember: #8B2635;
+  --green: #06C755;
+  --muted: rgba(26,26,26,0.72);
+  --line:  rgba(47,87,51,0.28);
+  --line2: rgba(47,87,51,0.15);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--ink); font-family: 'Noto Serif TC', serif; overflow-x: hidden; cursor: none; }
+
+/* CURSOR */
+.cursor { width: 10px; height: 10px; background: var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: background 0.3s; }
+.cursor-ring { width: 36px; height: 36px; border: 1px solid var(--gold); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); opacity: 0.6; transition: border-color 0.3s; }
+
+/* NAV */
+nav { position: fixed; top:0; left:0; right:0; z-index:200; padding:20px 48px; display:flex; justify-content:space-between; align-items:center; background:rgba(250,250,247,0.96); border-bottom:1px solid var(--line2); backdrop-filter:blur(16px); transition:all 0.4s; }
+nav.scrolled { box-shadow:0 2px 24px rgba(26,18,8,0.06); }
+.nav-logo { display:flex; flex-direction:column; }
+.nav-logo-main { font-size:1.1rem; letter-spacing:0.45em; color:var(--gold); font-weight:500; }
+.nav-logo-sub { font-size:0.52rem; letter-spacing:0.65em; color:var(--gold2); opacity:0.7; margin-top:2px; font-weight:300; }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a { color:var(--ink2); text-decoration:none; font-size:0.75rem; letter-spacing:0.28em; font-weight:400; transition:color 0.3s; }
+.nav-links a:hover { color:var(--ember); }
+.nav-cta { background:var(--gold); color:#fff; padding:9px 22px; font-family:inherit; font-size:0.72rem; letter-spacing:0.25em; text-decoration:none; transition:all 0.3s; font-weight:500; }
+.nav-cta:hover { background:var(--ember); transform:translateY(-1px); }
+.nav-toggle { display:none; flex-direction:column; gap:5px; cursor:none; background:none; border:none; }
+.nav-toggle span { width:22px; height:1.5px; background:var(--ink); }
+
+/* HERO */
+#hero { min-height:100vh; display:flex; align-items:center; padding:120px 48px 80px; position:relative; overflow:hidden; }
+.hero-bg { position:absolute; inset:0; background: radial-gradient(ellipse at 80% 20%, rgba(61,107,66,0.06) 0%, transparent 50%), radial-gradient(ellipse at 20% 80%, rgba(139,38,53,0.04) 0%, transparent 50%), var(--bg); }
+.hero-grid { position:absolute; inset:0; background-image: linear-gradient(rgba(61,107,66,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(61,107,66,0.05) 1px, transparent 1px); background-size:60px 60px; pointer-events:none; }
+.hero-watermark { position:absolute; right:-2%; top:50%; transform:translateY(-50%); font-family:'Cormorant Garamond',serif; font-size:clamp(8rem,18vw,18rem); font-weight:300; color:rgba(61,107,66,0.04); letter-spacing:0.1em; pointer-events:none; user-select:none; white-space:nowrap; }
+.hero-content { position:relative; z-index:2; max-width:1200px; margin:0 auto; width:100%; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.hero-text { animation:fadeUp 1s ease both; }
+.hero-label { font-size:0.6rem; letter-spacing:0.7em; color:var(--gold); font-weight:500; margin-bottom:24px; display:block; }
+.hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(3.5rem,7vw,6rem); font-weight:300; line-height:1.05; margin-bottom:8px; color:var(--ink); letter-spacing:0.02em; }
+.hero-title-zh { font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:700; color:var(--gold); letter-spacing:0.18em; display:block; margin-bottom:32px; }
+.hero-desc { font-size:0.9rem; line-height:2.1; color:var(--muted); font-weight:300; max-width:440px; margin-bottom:44px; }
+.hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
+.btn-gold { background:var(--gold); color:#fff; padding:13px 32px; font-family:inherit; font-size:0.8rem; letter-spacing:0.25em; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all 0.3s; font-weight:500; }
+.btn-gold:hover { background:var(--ember); transform:translateY(-2px); box-shadow:0 8px 24px rgba(139,38,53,0.2); }
+.btn-outline-dark { border:1.5px solid var(--ink2); color:var(--ink2); padding:13px 32px; font-family:inherit; font-size:0.8rem; letter-spacing:0.25em; text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:all 0.3s; background:transparent; cursor:none; }
+.btn-outline-dark:hover { background:var(--ink); color:#fff; border-color:var(--ink); }
+.hero-visual { position:relative; animation:fadeUp 1s 0.2s ease both; }
+.hero-card { background:#fff; border:1px solid var(--line); padding:40px; box-shadow:0 20px 60px rgba(26,18,8,0.08); }
+.hero-card-label { font-size:0.58rem; letter-spacing:0.6em; color:var(--gold); margin-bottom:20px; display:block; }
+.hero-services { display:flex; flex-direction:column; gap:16px; }
+.hero-service { display:flex; align-items:center; gap:16px; padding:16px; background:var(--bg); border:1px solid var(--line2); transition:all 0.3s; }
+.hero-service:hover { border-color:var(--ember); background:#fff; }
+.service-icon { font-size:1.2rem; width:40px; text-align:center; flex-shrink:0; }
+.service-name { font-size:0.85rem; font-weight:500; color:var(--ink); margin-bottom:3px; }
+.service-desc { font-size:0.7rem; color:var(--muted); font-weight:300; }
+.hero-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); margin-top:24px; }
+.hero-stat { background:#fff; padding:18px 12px; text-align:center; }
+.stat-n { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold); font-weight:300; display:block; line-height:1; }
+.stat-l { font-size:0.58rem; letter-spacing:0.3em; color:var(--muted); margin-top:5px; display:block; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:translateY(0); } }
+
+/* DIVIDER */
+.divider { width:100%; height:1px; background:linear-gradient(to right, transparent, var(--line), transparent); }
+
+/* SECTION */
+.section { padding:100px 48px; max-width:1200px; margin:0 auto; }
+.section-label { font-size:0.6rem; letter-spacing:0.65em; color:var(--gold); font-weight:500; margin-bottom:14px; display:block; }
+.section-title { font-size:clamp(2rem,4vw,3rem); font-weight:700; line-height:1.1; margin-bottom:16px; color:var(--ink); }
+.section-desc { font-size:0.9rem; line-height:2; color:var(--muted); font-weight:300; max-width:560px; }
+
+/* MARQUEE */
+.marquee-wrap { overflow:hidden; background:var(--gold); padding:14px 0; }
+.marquee-track { display:flex; animation:marquee 30s linear infinite; white-space:nowrap; }
+.marquee-item { font-size:0.62rem; letter-spacing:0.42em; color:rgba(255,255,255,0.9); padding:0 36px; font-weight:400; flex-shrink:0; }
+.marquee-dot { color:rgba(255,255,255,0.4); }
+@keyframes marquee { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+
+/* SERVICES */
+#services { background:var(--bg2); padding:100px 0; border-top:1px solid var(--line2); border-bottom:1px solid var(--line2); }
+.services-inner { max-width:1200px; margin:0 auto; padding:0 48px; }
+.services-header { text-align:center; margin-bottom:64px; }
+.services-header .section-desc { margin:0 auto; text-align:center; }
+.services-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line2); border:1px solid var(--line2); }
+.service-card { background:var(--bg); padding:44px 36px; transition:all 0.35s; position:relative; overflow:hidden; }
+.service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--ember); transform:scaleX(0); transition:transform 0.35s; }
+.service-card:hover { background:#fff; }
+.service-card:hover::before { transform:scaleX(1); }
+.service-card-icon { font-size:2rem; margin-bottom:20px; display:block; }
+.service-card-title { font-size:1.05rem; font-weight:700; margin-bottom:12px; color:var(--ink); letter-spacing:0.05em; }
+.service-card-desc { font-size:0.82rem; line-height:1.95; color:var(--muted); font-weight:300; margin-bottom:20px; }
+.service-card-items { list-style:none; display:flex; flex-direction:column; gap:8px; }
+.service-card-items li { font-size:0.75rem; color:var(--muted); display:flex; align-items:center; gap:8px; }
+.service-card-items li::before { content:'—'; color:var(--ember); font-size:0.7rem; }
+
+/* PORTFOLIO */
+#portfolio .section-header { margin-bottom:56px; display:flex; justify-content:space-between; align-items:flex-end; }
+.portfolio-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.portfolio-card { background:#fff; border:1px solid var(--line2); overflow:hidden; transition:all 0.35s; cursor:none; position:relative; }
+.portfolio-card:hover { box-shadow:0 16px 48px rgba(26,18,8,0.12); transform:translateY(-5px); border-color:var(--ember); }
+.portfolio-card-img { aspect-ratio:4/3; background:var(--bg2); display:flex; align-items:center; justify-content:center; font-size:2.5rem; position:relative; overflow:hidden; }
+.portfolio-card-img-bg { position:absolute; inset:0; background:linear-gradient(135deg, var(--bg2) 0%, var(--bg3) 100%); transition:all 0.35s; }
+.portfolio-card:hover .portfolio-card-img-bg { background:linear-gradient(135deg, var(--bg3) 0%, rgba(61,107,66,0.15) 100%); }
+.portfolio-card-img-icon { position:relative; z-index:1; transition:transform 0.35s; }
+.portfolio-card:hover .portfolio-card-img-icon { transform:scale(1.1); }
+.portfolio-overlay { position:absolute; inset:0; background:rgba(44,44,44,0.88); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.35s; padding:24px; z-index:2; }
+.portfolio-card:hover .portfolio-overlay { opacity:1; }
+.portfolio-overlay-text { font-family:'Cormorant Garamond',serif; font-size:1rem; font-weight:300; color:#fff; text-align:center; line-height:1.7; letter-spacing:0.05em; font-style:italic; }
+.portfolio-card-body { padding:24px; }
+.portfolio-card-tag { font-size:0.58rem; letter-spacing:0.35em; color:var(--gold); font-weight:500; margin-bottom:8px; display:block; }
+.portfolio-card-title { font-size:1rem; font-weight:700; margin-bottom:6px; color:var(--ink); }
+.portfolio-card-desc { font-size:0.75rem; color:var(--muted); line-height:1.75; font-weight:300; }
+.portfolio-card-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.portfolio-tag { font-size:0.58rem; letter-spacing:0.15em; color:var(--muted); border:1px solid var(--line); padding:3px 8px; }
+.portfolio-card-link { display:inline-flex; align-items:center; gap:6px; font-size:0.72rem; color:var(--ember); text-decoration:none; margin-top:12px; letter-spacing:0.18em; font-weight:500; transition:gap 0.3s; }
+.portfolio-card-link:hover { gap:10px; }
+
+/* ABOUT */
+#about { background:var(--bg2); padding:100px 0; border-top:1px solid var(--line2); border-bottom:1px solid var(--line2); }
+.about-inner { max-width:1200px; margin:0 auto; padding:0 48px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.about-values { display:flex; flex-direction:column; gap:24px; margin-top:36px; }
+.about-value { display:flex; gap:20px; align-items:flex-start; }
+.about-value-num { font-family:'Cormorant Garamond',serif; font-size:1.8rem; color:var(--gold); font-weight:300; line-height:1; flex-shrink:0; width:40px; }
+.about-value-title { font-size:0.9rem; font-weight:700; color:var(--ink); margin-bottom:5px; letter-spacing:0.08em; }
+.about-value-desc { font-size:0.78rem; color:var(--muted); line-height:1.85; font-weight:300; }
+.about-visual { position:relative; }
+.about-card { background:#fff; border:1px solid var(--line); padding:40px; box-shadow:0 12px 40px rgba(26,18,8,0.06); }
+.about-card-title { font-family:'Cormorant Garamond',serif; font-size:2rem; color:var(--gold); font-weight:300; margin-bottom:6px; }
+.about-card-subtitle { font-size:0.68rem; letter-spacing:0.35em; color:var(--muted); margin-bottom:24px; display:block; }
+.about-card-desc { font-size:0.85rem; line-height:1.95; color:var(--muted); font-weight:300; }
+.about-tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:24px; }
+.about-tag { font-size:0.62rem; letter-spacing:0.22em; color:var(--gold); border:1px solid var(--line); padding:5px 12px; font-weight:500; transition:all 0.3s; }
+.about-tag:hover { background:var(--ember); color:#fff; border-color:var(--ember); }
+
+/* CONTACT */
+#contact { padding:100px 48px; max-width:1200px; margin:0 auto; }
+.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:56px; }
+.contact-info { display:flex; flex-direction:column; gap:28px; }
+.contact-item { display:flex; gap:16px; }
+.contact-icon { width:44px; height:44px; border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; font-size:1rem; flex-shrink:0; background:#fff; }
+.contact-label { font-size:0.58rem; letter-spacing:0.35em; color:var(--gold); font-weight:500; margin-bottom:5px; display:block; }
+.contact-value { font-size:0.9rem; color:var(--ink); }
+.contact-value a { color:var(--gold); text-decoration:none; transition:color 0.3s; }
+.contact-value a:hover { color:var(--ember); }
+.contact-ctas { display:flex; flex-direction:column; gap:10px; margin-top:36px; }
+.contact-ctas a { text-align:center; padding:14px; font-family:inherit; font-size:0.8rem; letter-spacing:0.22em; text-decoration:none; transition:all 0.3s; display:flex; align-items:center; justify-content:center; gap:8px; font-weight:500; }
+
+/* FOOTER */
+footer { border-top:1px solid var(--line); padding:48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; background:var(--bg2); }
+.footer-brand { font-size:0.85rem; letter-spacing:0.45em; color:var(--gold); font-weight:600; }
+.footer-brand small { display:block; font-size:0.55rem; letter-spacing:0.55em; color:var(--gold2); opacity:0.6; margin-top:3px; font-weight:300; }
+.footer-info { font-size:0.62rem; letter-spacing:0.2em; color:var(--muted); text-align:center; }
+.footer-info span { display:block; margin-top:4px; }
+.footer-social { display:flex; gap:10px; }
+.social-btn { width:36px; height:36px; border:1px solid var(--line); display:flex; align-items:center; justify-content:center; text-decoration:none; color:var(--muted); font-size:0.78rem; transition:all 0.3s; background:#fff; font-weight:500; }
+.social-btn:hover { border-color:var(--ember); color:var(--ember); }
+.footer-copy { font-size:0.58rem; letter-spacing:0.22em; color:rgba(26,18,8,0.3); }
+
+/* FLOAT */
+.float-wrap { position:fixed; bottom:24px; right:20px; z-index:300; display:flex; flex-direction:column; gap:10px; }
+.float-btn { width:52px; height:52px; border-radius:50%; display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:1.2rem; box-shadow:0 4px 20px rgba(26,18,8,0.15); transition:transform 0.3s, box-shadow 0.3s; }
+.float-btn:hover { transform:scale(1.1); box-shadow:0 8px 28px rgba(26,18,8,0.2); }
+.float-line { background:#06C755; }
+.float-ig { background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); }
+
+/* MOBILE NAV */
+.mobile-nav { display:none; position:fixed; top:70px; left:0; right:0; background:rgba(250,250,247,0.99); padding:24px; border-bottom:1px solid var(--line2); z-index:199; flex-direction:column; gap:18px; box-shadow:0 8px 32px rgba(26,18,8,0.08); }
+.mobile-nav.open { display:flex; }
+.mobile-nav a { color:var(--ink2); text-decoration:none; font-size:0.9rem; letter-spacing:0.25em; font-weight:400; padding:8px 0; border-bottom:1px solid var(--line2); }
+.mobile-nav a:last-child { border:none; }
+
+/* RESPONSIVE */
+@media(max-width:960px) {
+  nav { padding:16px 20px; }
+  .nav-links, .nav-cta { display:none; }
+  .nav-toggle { display:flex; }
+  #hero { padding:100px 20px 60px; }
+  .hero-content { grid-template-columns:1fr; gap:40px; }
+  .services-inner { padding:0 20px; }
+  .services-grid { grid-template-columns:1fr; }
+  #portfolio { padding:60px 20px; }
+  .portfolio-grid { grid-template-columns:1fr 1fr; }
+  .about-inner { grid-template-columns:1fr; padding:0 20px; }
+  #contact { padding:60px 20px; }
+  .contact-grid { grid-template-columns:1fr; gap:40px; }
+  footer { flex-direction:column; text-align:center; padding:28px 20px; }
+  .section { padding:60px 20px; }
+}
+@media(max-width:600px) {
+  .portfolio-grid { grid-template-columns:1fr; }
+  #portfolio .section-header { flex-direction:column; align-items:flex-start; gap:16px; }
+  body { cursor:auto; }
+  .cursor, .cursor-ring { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<nav id="nav">
+  <div class="nav-logo">
+    <span class="nav-logo-main">晴域 SEREO</span>
+    <span class="nav-logo-sub">RESTAURANT & BEAUTY DIGITAL PARTNER</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">服務項目</a></li>
+    <li><a href="#portfolio">作品集</a></li>
+    <li><a href="#about">關於晴域</a></li>
+    <li><a href="#contact">聯絡我們</a></li>
+  </ul>
+  <a href="https://line.me/ti/p/@625ummgh" target="_blank" class="nav-cta">立即諮詢</a>
+  <button class="nav-toggle" onclick="toggleNav()" aria-label="選單">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="#services" onclick="closeNav()">服務項目</a>
+  <a href="#portfolio" onclick="closeNav()">作品集</a>
+  <a href="#about" onclick="closeNav()">關於晴域</a>
+  <a href="#contact" onclick="closeNav()">聯絡我們</a>
+  <a href="https://line.me/ti/p/@625ummgh" target="_blank" style="color:var(--gold);font-weight:600;">💬 立即諮詢</a>
+</div>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-watermark">SEREO</div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <span class="hero-label">DIGITAL AESTHETIC DESIGN CONSULTANCY</span>
+      <h1 class="hero-title">Sereo<span class="hero-title-zh">晴域設計</span></h1>
+      <p class="hero-desc">餐飲與美業的數位轉換夥伴——懂你的語言，更懂你的生意。從品牌門面到導流系統，我們讓你的店被更多人看見。</p>
+      <div class="hero-ctas">
+        <a href="https://line.me/ti/p/@625ummgh" target="_blank" class="btn-gold">💬 免費諮詢</a>
+        <a href="#portfolio" class="btn-outline-dark">查看作品集 →</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <span class="hero-card-label">OUR SERVICES</span>
+        <div class="hero-services">
+          <div class="hero-service"><span class="service-icon">🌐</span><div><div class="service-name">網站架設</div><div class="service-desc">品牌官網、電商、Landing Page</div></div></div>
+          <div class="hero-service"><span class="service-icon">✦</span><div><div class="service-name">品牌視覺規劃</div><div class="service-desc">社群經營、視覺文案、形象設計</div></div></div>
+          <div class="hero-service"><span class="service-icon">◈</span><div><div class="service-name">數位轉型顧問</div><div class="service-desc">美業、餐飲、實體商圈數位化</div></div></div>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat"><span class="stat-n" data-target="6" data-suffix="+">0+</span><span class="stat-l">品牌案例</span></div>
+          <div class="hero-stat"><span class="stat-n" data-target="100" data-suffix="%">0%</span><span class="stat-l">客製設計</span></div>
+          <div class="hero-stat"><span class="stat-n" style="font-size:1.4rem;letter-spacing:0.05em;">美業</span><span class="stat-l">深度資源</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">品牌視覺規劃</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">網站架設</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">數位轉型顧問</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">SEO 優化</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">LINE 官方帳號</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">社群經營</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">餐飲導流系統</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">美業數位升級</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Google 在地優化</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">品牌視覺規劃</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">網站架設</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">數位轉型顧問</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">SEO 優化</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">LINE 官方帳號</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">社群經營</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">餐飲導流系統</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">美業數位升級</span><span class="marquee-dot">✦</span>
+    <span class="marquee-item">Google 在地優化</span><span class="marquee-dot">✦</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <span class="section-label">WHAT WE DO</span>
+      <h2 class="section-title">餐飲品牌 ‧ 數位整合方案</h2>
+      <p class="section-desc" style="margin:0 auto;text-align:center;">從視覺門面到自動化接客，幫餐飲與美業建立完整數位競爭力</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-card-icon">🌐</span>
+        <div class="service-card-title">視覺門面建立</div>
+        <p class="service-card-desc">打造像夫妻蝦莊等級的高質感品牌網站，讓客人還沒進店就愛上你。</p>
+        <ul class="service-card-items"><li>極簡美學品牌官網</li><li>菜單 / 服務項目展示</li><li>Google Map 完整串接</li><li>手機版完美呈現</li></ul>
+      </div>
+      <div class="service-card">
+        <span class="service-card-icon">📍</span>
+        <div class="service-card-title">商圈規劃與導流</div>
+        <p class="service-card-desc">解決「沒人看到店」的問題，把線上流量變成實際上門的客人。</p>
+        <ul class="service-card-items"><li>Google 在地優化</li><li>社群平台內容規劃</li><li>評論管理與口碑建立</li><li>美食平台上架協助</li></ul>
+      </div>
+      <div class="service-card">
+        <span class="service-card-icon">💬</span>
+        <div class="service-card-title">自動化接客系統</div>
+        <p class="service-card-desc">LINE 自動回應幫你 24 小時接客，處理訂位與菜單查詢，節省人力成本。</p>
+        <ul class="service-card-items"><li>LINE 官方帳號建置</li><li>自動回應腳本設定</li><li>訂位導流系統</li><li>美業預約整合</li></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="portfolio" class="section">
+  <div class="section-header">
+    <div><span class="section-label">OUR WORK</span><h2 class="section-title">精選作品集</h2></div>
+    <a href="https://line.me/ti/p/@625ummgh" target="_blank" class="btn-gold" style="white-space:nowrap;">洽詢合作 →</a>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-card">
+      <div class="portfolio-card-img">
+        <div class="portfolio-card-img-bg"></div>
+        <span class="portfolio-card-img-icon">🦐</span>
+        <div class="portfolio-overlay"><p class="portfolio-overlay-text">「從深夜食堂到數位名店，<br>讓品牌質感在深夜也發光。」</p></div>
+      </div>
+      <div class="portfolio-card-body">
+        <span class="portfolio-card-tag">餐飲數位轉型實績 ‧ 品牌美學典範</span>
+        <div class="portfolio-card-title">夫妻蝦莊</div>
+        <p class="portfolio-card-desc">板橋深夜食堂品牌官網，完整呈現活體蝦缸、菜單、評論與導流功能。</p>
+        <div class="portfolio-card-tags"><span class="portfolio-tag">#品牌視覺</span><span class="portfolio-tag">#餐飲導流</span><span class="portfolio-tag">#官網建置</span></div>
+        <a href="/fuqi-shrimp" class="portfolio-card-link">查看網站 →</a>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-card-img">
+        <div class="portfolio-card-img-bg"></div>
+        <span class="portfolio-card-img-icon">🍚</span>
+        <div class="portfolio-overlay"><p class="portfolio-overlay-text">「讓台北車站的香氣，<br>透過數位傳遞到每一個饕客。」</p></div>
+      </div>
+      <div class="portfolio-card-body">
+        <span class="portfolio-card-tag">餐飲數位化</span>
+        <div class="portfolio-card-title">紅米砂鍋粥</div>
+        <p class="portfolio-card-desc">台北車站周邊人氣名店，品牌數位形象與線上導流規劃。</p>
+        <div class="portfolio-card-tags"><span class="portfolio-tag">#品牌形象</span><span class="portfolio-tag">#商圈導流</span></div>
+        <a href="#contact" class="portfolio-card-link">洽詢了解 →</a>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-card-img">
+        <div class="portfolio-card-img-bg"></div>
+        <span class="portfolio-card-img-icon">🍷</span>
+        <div class="portfolio-overlay"><p class="portfolio-overlay-text">「老牌餐飲的新生命，<br>用美學讓經典重新被看見。」</p></div>
+      </div>
+      <div class="portfolio-card-body">
+        <span class="portfolio-card-tag">餐飲數位化</span>
+        <div class="portfolio-card-title">醉紅小酌</div>
+        <p class="portfolio-card-desc">中正區老牌餐飲，品牌重塑與社群形象升級整合方案。</p>
+        <div class="portfolio-card-tags"><span class="portfolio-tag">#品牌重塑</span><span class="portfolio-tag">#社群經營</span></div>
+        <a href="#contact" class="portfolio-card-link">洽詢了解 →</a>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-card-img">
+        <div class="portfolio-card-img-bg"></div>
+        <span class="portfolio-card-img-icon">🀄</span>
+        <div class="portfolio-overlay"><p class="portfolio-overlay-text">「質感社交的數位入口，<br>讓預約成為一種儀式感。」</p></div>
+      </div>
+      <div class="portfolio-card-body">
+        <span class="portfolio-card-tag">空間品牌規劃</span>
+        <div class="portfolio-card-title">起來麻將｜靜靜</div>
+        <p class="portfolio-card-desc">質感社交休閒空間，品牌定位與預約導流系統建置。</p>
+        <div class="portfolio-card-tags"><span class="portfolio-tag">#空間品牌</span><span class="portfolio-tag">#系統開發</span></div>
+        <a href="#contact" class="portfolio-card-link">洽詢了解 →</a>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-card-img">
+        <div class="portfolio-card-img-bg"></div>
+        <span class="portfolio-card-img-icon">✨</span>
+        <div class="portfolio-overlay"><p class="portfolio-overlay-text">「將醫美專業化為視覺藝術，<br>重塑高端客群信任感。」</p></div>
+      </div>
+      <div class="portfolio-card-body">
+        <span class="portfolio-card-tag">美業數位轉型</span>
+        <div class="portfolio-card-title">東妍 Angelina Beauty</div>
+        <p class="portfolio-card-desc">醫美診所數位形象重塑，導流系統規劃與諮詢通道整合。</p>
+        <div class="portfolio-card-tags"><span class="portfolio-tag">#醫美品牌</span><span class="portfolio-tag">#導流系統</span></div>
+        <a href="#contact" class="portfolio-card-link">洽詢了解 →</a>
+      </div>
+    </div>
+    <div class="portfolio-card">
+      <div class="portfolio-card-img">
+        <div class="portfolio-card-img-bg"></div>
+        <span class="portfolio-card-img-icon">💆</span>
+        <div class="portfolio-overlay"><p class="portfolio-overlay-text">「讓每一次預約，<br>都成為品牌體驗的開始。」</p></div>
+      </div>
+      <div class="portfolio-card-body">
+        <span class="portfolio-card-tag">美業數位轉型</span>
+        <div class="portfolio-card-title">1825 Scalp Care</div>
+        <p class="portfolio-card-desc">頭皮養護品牌官網建置，服務項目展示與預約導流整合。</p>
+        <div class="portfolio-card-tags"><span class="portfolio-tag">#美業官網</span><span class="portfolio-tag">#預約整合</span></div>
+        <a href="#contact" class="portfolio-card-link">洽詢了解 →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div id="about">
+  <div class="about-inner">
+    <div>
+      <span class="section-label">ABOUT SEREO</span>
+      <h2 class="section-title">關於<br>晴域設計</h2>
+      <p class="section-desc" style="margin-top:16px;">晴域，取「晴朗的域界」之意。我們相信每個品牌都有值得被看見的故事，我們的工作就是讓它在數位世界發光。</p>
+      <div class="about-values">
+        <div class="about-value"><span class="about-value-num">01</span><div><div class="about-value-title">美學優先</div><p class="about-value-desc">每一個設計決策都以品牌美學為核心，拒絕千篇一律的模板思維。</p></div></div>
+        <div class="about-value"><span class="about-value-num">02</span><div><div class="about-value-title">落地執行</div><p class="about-value-desc">從策略規劃到技術落地，全程陪跑，確保每個細節都到位。</p></div></div>
+        <div class="about-value"><span class="about-value-num">03</span><div><div class="about-value-title">深度資源</div><p class="about-value-desc">深耕美業與餐飲生態，擁有獨家的業界人脈與合作資源。</p></div></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-card">
+        <div class="about-card-title">Gina</div>
+        <span class="about-card-subtitle">晴域創辦人 ‧ 數位美學設計師</span>
+        <p class="about-card-desc">深耕美業與實體商圈多年，具備豐富的品牌顧問與數位轉型實戰經驗。以「讓每個品牌都值得被看見」為使命，帶領晴域團隊為客戶打造高質感的數位門面。</p>
+        <div class="about-tags">
+          <span class="about-tag">品牌策略</span><span class="about-tag">網站設計</span><span class="about-tag">美業顧問</span><span class="about-tag">社群經營</span><span class="about-tag">數位轉型</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<section id="contact" class="section" style="max-width:1200px;">
+  <span class="section-label">GET IN TOUCH</span>
+  <h2 class="section-title">開始合作</h2>
+  <p class="section-desc">有任何品牌數位化需求，歡迎透過以下方式與我們聯繫。</p>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:var(--line2);border:1px solid var(--line2);margin:40px 0;">
+    <div style="background:#fff;padding:32px 28px;">
+      <div style="font-size:0.58rem;letter-spacing:0.45em;color:var(--gold);margin-bottom:12px;">STANDARD</div>
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:10px;">標準架設</div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.8;margin-bottom:16px;">一次性建置費用，獲得完整品牌門面。適合想快速上線的餐飲與美業品牌。</p>
+      <a href="https://line.me/ti/p/@625ummgh" target="_blank" class="btn-outline-dark" style="font-size:0.72rem;padding:10px 20px;">了解方案 →</a>
+    </div>
+    <div style="background:var(--gold);padding:32px 28px;">
+      <div style="font-size:0.58rem;letter-spacing:0.45em;color:rgba(255,255,255,0.7);margin-bottom:12px;">RECOMMENDED</div>
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:10px;color:#fff;">營運管家</div>
+      <p style="font-size:0.78rem;color:rgba(255,255,255,0.85);line-height:1.8;margin-bottom:16px;">月費制，含網站維護、SEO 監控與內容更新，讓品牌持續保持最佳狀態。</p>
+      <a href="https://line.me/ti/p/@625ummgh" target="_blank" style="background:#fff;color:var(--gold);padding:10px 20px;font-family:inherit;font-size:0.72rem;letter-spacing:0.18em;text-decoration:none;font-weight:600;display:inline-block;">即刻升級體驗 →</a>
+    </div>
+    <div style="background:#fff;padding:32px 28px;">
+      <div style="font-size:0.58rem;letter-spacing:0.45em;color:var(--ember);margin-bottom:12px;">PARTNERSHIP</div>
+      <div style="font-size:1.1rem;font-weight:700;margin-bottom:10px;">戰略分潤</div>
+      <p style="font-size:0.78rem;color:var(--muted);line-height:1.8;margin-bottom:16px;">針對美業與特殊專案，提供帶客分潤的深度合作模式，共同打造獲利系統。</p>
+      <a href="https://line.me/ti/p/@625ummgh" target="_blank" style="background:var(--ember);color:#fff;padding:10px 20px;font-family:inherit;font-size:0.72rem;letter-spacing:0.18em;text-decoration:none;font-weight:500;display:inline-block;">查看美學選品 →</a>
+    </div>
+  </div>
+  <div class="contact-grid">
+    <div>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon" style="background:var(--gold);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </div>
+          <div><span class="contact-label">LINE 官方帳號</span><div class="contact-value"><a href="https://line.me/ti/p/@625ummgh" target="_blank">@625ummgh</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          </div>
+          <div><span class="contact-label">Instagram</span><div class="contact-value"><a href="https://instagram.com/sereoqingyu" target="_blank">@sereoqingyu</a></div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉️</div>
+          <div><span class="contact-label">電子郵件</span><div class="contact-value"><a href="mailto:sereoqingyu@gmail.com">sereoqingyu@gmail.com</a></div></div>
+        </div>
+      </div>
+      <div class="contact-ctas">
+        <a href="https://line.me/ti/p/@625ummgh" target="_blank" class="btn-gold">💬 LINE 立即諮詢</a>
+        <a href="https://instagram.com/sereoqingyu" target="_blank" class="btn-outline-dark">📸 追蹤 Instagram</a>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);padding:40px;">
+      <span class="section-label" style="margin-bottom:20px;">WHY SEREO</span>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div style="display:flex;gap:14px;align-items:flex-start;"><span style="color:var(--ember);font-size:1.1rem;flex-shrink:0;">✓</span><div><div style="font-size:0.85rem;font-weight:700;margin-bottom:4px;">100% 客製化設計</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.75;">每個專案都是獨一無二，不使用模板。</div></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start;"><span style="color:var(--ember);font-size:1.1rem;flex-shrink:0;">✓</span><div><div style="font-size:0.85rem;font-weight:700;margin-bottom:4px;">美業深度資源</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.75;">多年美業生態耕耘，擁有獨家合作網絡。</div></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start;"><span style="color:var(--ember);font-size:1.1rem;flex-shrink:0;">✓</span><div><div style="font-size:0.85rem;font-weight:700;margin-bottom:4px;">全程陪跑服務</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.75;">從規劃到上線，售後持續支援與優化。</div></div></div>
+        <div style="display:flex;gap:14px;align-items:flex-start;"><span style="color:var(--ember);font-size:1.1rem;flex-shrink:0;">✓</span><div><div style="font-size:0.85rem;font-weight:700;margin-bottom:4px;">快速交付</div><div style="font-size:0.75rem;color:var(--muted);line-height:1.75;">高效執行，讓您的品牌門面盡快上線。</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">晴域 SEREO<small>DIGITAL AESTHETIC DESIGN</small></div>
+  <div class="footer-info">Taipei, Taiwan · Remote Friendly<span>sereoqingyu@gmail.com</span></div>
+  <div class="footer-social">
+    <a href="https://instagram.com/sereoqingyu" target="_blank" class="social-btn">IG</a>
+    <a href="https://line.me/ti/p/@625ummgh" target="_blank" class="social-btn">L</a>
+  </div>
+  <div class="footer-copy">© 2025 晴域 Sereo Design · All Rights Reserved</div>
+</footer>
+
+<div class="float-wrap">
+  <a href="https://line.me/ti/p/@625ummgh" target="_blank" class="float-btn float-line" title="LINE 諮詢">💬</a>
+  <a href="https://instagram.com/sereoqingyu" target="_blank" class="float-btn float-ig" title="Instagram">📸</a>
+</div>
+
+<script>
+// 自訂遊標
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove', e => { mx=e.clientX; my=e.clientY; });
+function animateCursor() {
+  cursor.style.left = mx+'px'; cursor.style.top = my+'px';
+  rx += (mx-rx)*0.12; ry += (my-ry)*0.12;
+  ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// Hover 遊標變色
+document.querySelectorAll('a, button').forEach(el => {
+  el.addEventListener('mouseenter', () => { cursor.style.background='#8B2635'; ring.style.borderColor='#8B2635'; cursor.style.transform='translate(-50%,-50%) scale(1.5)'; });
+  el.addEventListener('mouseleave', () => { cursor.style.background='var(--gold)'; ring.style.borderColor='var(--gold)'; cursor.style.transform='translate(-50%,-50%) scale(1)'; });
+});
+
+// Nav scroll
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+});
+function toggleNav() { document.getElementById('mobileNav').classList.toggle('open'); }
+function closeNav() { document.getElementById('mobileNav').classList.remove('open'); }
+
+// 數字跳動
+function animateCount(el) {
+  const target = parseInt(el.getAttribute('data-target'));
+  const suffix = el.getAttribute('data-suffix') || '+';
+  const duration = 1800;
+  const start = performance.now();
+  function update(now) {
+    const progress = Math.min((now-start)/duration, 1);
+    const eased = 1 - Math.pow(1-progress, 3);
+    el.textContent = Math.floor(eased*target) + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(update);
+}
+const statObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.stat-n[data-target]').forEach(n => animateCount(n));
+      statObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+const heroStats = document.querySelector('.hero-stats');
+if (heroStats) statObserver.observe(heroStats);
+</script>
+</body>
+</html>
