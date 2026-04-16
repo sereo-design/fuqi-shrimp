@@ -437,44 +437,17 @@ footer {
       </div>
     </div>
     <div class="hero-visual">
-      <div class="menu-showcase">
+      <div class="menu-showcase" style="overflow:hidden;position:relative;">
         <div class="menu-showcase-header">
-          <span class="menu-showcase-title">TODAY'S MENU</span>
-          <span class="menu-showcase-live">現在營業中</span>
+          <span class="menu-showcase-title">店內活體蝦缸</span>
+          <span class="menu-showcase-live">現撈現烤</span>
         </div>
-        <div class="menu-items-list">
-          <div class="menu-item-row">
-            <span class="menu-item-emoji">🦐</span>
-            <div class="menu-item-info">
-              <div class="menu-item-name">活體泰國蝦</div>
-              <div class="menu-item-desc">現撈現烤 · 蝦膏飽滿</div>
-            </div>
-            <span class="menu-item-tag hot">必點</span>
-          </div>
-          <div class="menu-item-row">
-            <span class="menu-item-emoji">🐟</span>
-            <div class="menu-item-info">
-              <div class="menu-item-name">胡椒魚</div>
-              <div class="menu-item-desc">鮮嫩入味 · 胡椒香氣逼人</div>
-            </div>
-            <span class="menu-item-tag hot">招牌</span>
-          </div>
-          <div class="menu-item-row">
-            <span class="menu-item-emoji">🦑</span>
-            <div class="menu-item-info">
-              <div class="menu-item-name">烤小卷</div>
-              <div class="menu-item-desc">炭火烤製 · Q彈鮮甜</div>
-            </div>
-            <span class="menu-item-tag">熱門</span>
-          </div>
-          <div class="menu-item-row">
-            <span class="menu-item-emoji">🍗</span>
-            <div class="menu-item-info">
-              <div class="menu-item-name">烤物拼盤</div>
-              <div class="menu-item-desc">多人聚餐最佳選擇</div>
-            </div>
-            <span class="menu-item-tag">推薦</span>
-          </div>
+        <div style="position:relative;width:100%;background:#000;">
+          <video autoplay muted loop playsinline style="width:100%;display:block;max-height:320px;object-fit:cover;">
+            <source src="店內蝦缸1.mp4" type="video/mp4">
+            <source src="店內蝦缸2.mp4" type="video/mp4">
+          </video>
+          <div style="position:absolute;bottom:12px;left:12px;background:rgba(196,30,30,0.85);color:#fff;font-size:0.6rem;letter-spacing:0.3em;padding:5px 12px;font-weight:700;">活體泰國蝦 · 現撈現烤</div>
         </div>
         <div class="menu-showcase-footer">
           <div class="showcase-stat">
@@ -574,6 +547,82 @@ footer {
   </div>
 </div>
 
+<!-- 菜色照片牆 -->
+<div id="gallery" style="background:var(--bg3);padding:80px 0;border-top:2px solid var(--line);border-bottom:2px solid var(--line);">
+  <div style="max-width:1200px;margin:0 auto;padding:0 48px;">
+    <span class="section-label">OUR DISHES</span>
+    <h2 class="section-title" style="margin-bottom:40px;">招牌菜色實拍</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3px;background:var(--line2);" id="photoGrid">
+      <div class="photo-cell reveal" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="胡椒蝦.jpg" alt="胡椒蝦" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">胡椒蝦</div>
+      </div>
+      <div class="photo-cell reveal reveal-d1" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="蒜頭蝦.jpg" alt="蒜頭蝦" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">蒜頭蝦</div>
+      </div>
+      <div class="photo-cell reveal reveal-d2" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="蒜香奶油蝦.jpg" alt="蒜香奶油蝦" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">蒜香奶油蝦</div>
+      </div>
+      <div class="photo-cell reveal reveal-d3" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="檸檬蝦.jpg" alt="檸檬蝦" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">檸檬蝦</div>
+      </div>
+      <div class="photo-cell reveal" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="胡椒魚.jpg" alt="胡椒魚" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">胡椒魚</div>
+      </div>
+      <div class="photo-cell reveal reveal-d1" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="鹽烤魚.jpg" alt="鹽烤魚" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">鹽烤魚</div>
+      </div>
+      <div class="photo-cell reveal reveal-d2" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="胡椒鳳螺.jpg" alt="胡椒鳳螺" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">胡椒鳳螺</div>
+      </div>
+      <div class="photo-cell reveal reveal-d3" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="燒酒雞佛.jpg" alt="燒酒雞佛" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">燒酒雞佛</div>
+      </div>
+      <div class="photo-cell reveal" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="絲瓜蛤蠣湯.jpg" alt="絲瓜蛤蠣湯" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">絲瓜蛤蠣湯</div>
+      </div>
+      <div class="photo-cell reveal reveal-d1" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="香烤節瓜.jpg" alt="香烤節瓜" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">香烤節瓜</div>
+      </div>
+      <div class="photo-cell reveal reveal-d2" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="炒高麗菜.jpg" alt="炒高麗菜" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">炒高麗菜</div>
+      </div>
+      <div class="photo-cell reveal reveal-d3" style="aspect-ratio:1;overflow:hidden;position:relative;background:#111;">
+        <img src="店門面.jpg" alt="店門面" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.06)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="photo-label">夫妻蝦莊</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.photo-cell { cursor:pointer; }
+.photo-label {
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(transparent,rgba(28,16,8,0.75));
+  color:#fff;font-size:0.65rem;letter-spacing:0.3em;
+  padding:20px 12px 10px;font-weight:700;
+  opacity:0;transition:opacity 0.3s;
+}
+.photo-cell:hover .photo-label { opacity:1; }
+@media(max-width:960px){
+  #photoGrid { grid-template-columns:repeat(2,1fr) !important; }
+}
+@media(max-width:480px){
+  #photoGrid { grid-template-columns:repeat(2,1fr) !important; }
+}
+</style>
+
 <div class="divider"></div>
 
 <div id="highlight">
@@ -606,6 +655,44 @@ footer {
 <section id="info" class="section" style="max-width:1200px;">
   <span class="section-label">FIND US</span>
   <h2 class="section-title">位置 · 訂位</h2>
+
+  <!-- Google Maps 嵌入 -->
+  <div style="width:100%;margin-bottom:48px;border:2px solid var(--line2);overflow:hidden;box-shadow:6px 6px 0 rgba(196,30,30,0.1);">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.7!2d121.4633!3d25.0089!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a9b0b0b0b0b1%3A0x0!2z5a6J5Yw15aSn6I6o5bq36Imv5LiJ5q616Kmm5LiO5YiR55Wq!5e0!3m2!1szh-TW!2stw!4v1681234567890!5m2!1szh-TW!2stw&q=新北市板橋區三民路二段110-1號+夫妻蝦莊"
+      width="100%"
+      height="320"
+      style="border:0;display:block;"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+
+  <!-- 營業時間 JSON-LD 結構化資料（SEO用） -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "夫妻蝦莊",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "三民路二段110-1號",
+      "addressLocality": "板橋區",
+      "addressRegion": "新北市",
+      "addressCountry": "TW"
+    },
+    "telephone": "0979-666-103",
+    "openingHours": "Mo-Su 17:00-03:00",
+    "servesCuisine": "海鮮,泰國蝦,烤物",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "85"
+    }
+  }
+  </script>
+
   <div class="info-grid">
     <div>
       <div class="info-cards">
@@ -613,7 +700,7 @@ footer {
           <div class="info-card-icon">📍</div>
           <div>
             <span class="info-label">地址</span>
-            <div class="info-value">新北市板橋區三民路二段110-1號</div>
+            <div class="info-value"><a href="https://maps.google.com/?q=新北市板橋區三民路二段110-1號+夫妻蝦莊" target="_blank" style="color:var(--red);text-decoration:none;">新北市板橋區三民路二段110-1號 📍</a></div>
           </div>
         </div>
         <div class="info-card reveal reveal-d1">
@@ -640,7 +727,9 @@ footer {
       </div>
       <div class="info-ctas">
         <a href="tel:0979666103" class="btn-red">📞 立即電話訂位</a>
-        <a href="https://instagram.com/c.l_shrimp" target="_blank" class="btn-outline">📸 追蹤 Instagram @c.l_shrimp</a>
+        <a href="https://line.me/ti/p/0979666103" target="_blank" class="btn-outline">💬 LINE 聯絡我們</a>
+        <a href="https://instagram.com/c.l_shrimp" target="_blank" class="btn-outline">📸 Instagram</a>
+        <a href="https://www.facebook.com/profile.php?id=61584847914954" target="_blank" class="btn-outline">👍 Facebook</a>
       </div>
     </div>
     <div class="review-box reveal">
@@ -679,7 +768,9 @@ footer {
         <a href="tel:0979666103">電話訂位</a>
       </div>
       <div class="footer-social">
+        <a href="https://www.facebook.com/profile.php?id=61584847914954" target="_blank" class="social-btn">FB</a>
         <a href="https://instagram.com/c.l_shrimp" target="_blank" class="social-btn">IG</a>
+        <a href="https://line.me/ti/p/0979666103" target="_blank" class="social-btn">LINE</a>
         <a href="tel:0979666103" class="social-btn">📞</a>
       </div>
     </div>
@@ -692,7 +783,9 @@ footer {
 
 <div class="float-wrap">
   <a href="tel:0979666103" class="float-btn float-line" title="電話訂位" style="background:var(--red);font-size:1.4rem;">📞</a>
+  <a href="https://line.me/ti/p/0979666103" target="_blank" class="float-btn" title="LINE" style="background:#06C755;font-size:1.1rem;color:#fff;font-weight:900;">LINE</a>
   <a href="https://instagram.com/c.l_shrimp" target="_blank" class="float-btn float-ig" title="Instagram">📸</a>
+  <a href="https://www.facebook.com/profile.php?id=61584847914954" target="_blank" class="float-btn" title="Facebook" style="background:#1877F2;font-size:1.1rem;color:#fff;font-weight:900;">FB</a>
 </div>
 
 <script>
